@@ -31,8 +31,25 @@ jobs:
   CD:
     runs-on: ubuntu-latest
     needs: [CI]
-
+    
     steps:
-    - uses: actions/checkout@v3
-    - name: Passo 01
-      run: echo "Deploy da aplicação"
+    - name: Obtendo o código
+      uses: actions/checkout@v3
+    - name: Configurar as credenciais da AWS
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: us-east-1
+    - name: Update KubeConfig
+      shell: bash
+      run: |
+        aws eks update-kubeconfig --name imersao-eks --region us-east-1
+    - name: Deploy to Kubernetes cluster
+      uses: Azure/k8s-deploy@v4.9
+      with:
+        manifests: |
+          ./kube-news/k8s/deployment.yaml
+        images: |
+          fabricioveronez/kube-news:${{github.run_number}}
+    
