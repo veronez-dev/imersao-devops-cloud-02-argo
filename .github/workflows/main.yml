@@ -35,6 +35,8 @@ jobs:
     steps:
     - name: Obtendo o código
       uses: actions/checkout@v3
+    - name: Instalação no Kubectl
+      uses: Azure/setup-kubectl@v3.2
     - name: Configurar as credenciais da AWS
       uses: aws-actions/configure-aws-credentials@v4
       with:
