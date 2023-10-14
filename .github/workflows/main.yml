@@ -16,6 +16,15 @@ jobs:
       with:
         username: ${{secrets.DOCKERHUB_USER}}
         password: ${{secrets.DOCKERHUB_PWD}}
+    - name: Construção da imagem Docker worker
+      uses: docker/build-push-action@v5.0.0
+      with: 
+        context: ./kube-news/src
+        file: ./kube-news/src/Dockerfile
+        push: true
+        tags: |
+          fabricioveronez/kube-news:${{github.run_number}}
+          fabricioveronez/kube-news:latest                
 
   CD:
     runs-on: ubuntu-latest
