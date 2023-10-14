@@ -11,6 +11,8 @@ jobs:
   CI:
     runs-on: ubuntu-latest
     steps:
+    - name: Obtendo o código
+      uses: actions/checkout@v3
     - name: Docker Login
       uses: docker/login-action@v3.0.0
       with:
