@@ -35,8 +35,6 @@ jobs:
     steps:
     - name: Obtendo o código
       uses: actions/checkout@v3
-    - name: Instalação no Kubectl
-      uses: Azure/setup-kubectl@v3.2
     - name: Configurar as credenciais da AWS
       uses: aws-actions/configure-aws-credentials@v4
       with:
@@ -46,7 +44,6 @@ jobs:
     - name: Update KubeConfig
       shell: bash
       run: |
-        export KUBECONFIG="~/.kube/config"
         aws eks update-kubeconfig --name imersao-eks --region us-east-1
     - name: Deploy to Kubernetes cluster
       uses: Azure/k8s-deploy@v4.9
