@@ -31,4 +31,3 @@ jobs:
     - name: Aplicar o deploy
       run: echo "Executar o Kubectl apply"
 
-      
