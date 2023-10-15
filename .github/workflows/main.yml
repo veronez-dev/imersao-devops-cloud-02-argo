@@ -9,8 +9,8 @@ jobs:
   CI:
     runs-on: ubuntu-latest
     steps:
-    - name: Efetuar o login no docker hub
-      run: echo "executar o docker login"
+    - name: Checkout do repositorio
+      uses: actions/checkout@v4.1.0
     - name: Docker Login
       uses: docker/login-action@v3.0.0
       with:
