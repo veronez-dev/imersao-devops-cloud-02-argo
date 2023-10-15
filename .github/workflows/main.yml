@@ -29,8 +29,14 @@ jobs:
     runs-on: ubuntu-latest
     needs: [CI]
     steps:
-    - name: Autenticar na AWS
-      run: echo "Autenticar na AWS"
+    - name: Checkout do repositorio
+      uses: actions/checkout@v4.1.0
+    - name: Configuração da credencial da AWS
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_ID }}
+        aws-region: us-east-1
     - name: Configurar o KubeConfig
       run: echo "Configurar o KubeCOnfig"
     - name: Aplicar o deploy
