@@ -9,10 +9,15 @@ jobs:
   CI:
     runs-on: ubuntu-latest
     steps:
-    - name: Construir a imagem de container
-      run: echo "executar o docker build"
     - name: Efetuar o login no docker hub
       run: echo "executar o docker login"
+    - name: Docker Login
+      uses: docker/login-action@v3.0.0
+      with:
+        username: ${{ secrets.DOCKERHUB_USER }}
+        password: ${{ secrets.DOCKERHUB_PWD }}
+    - name: Construir a imagem de container
+      run: echo "docker build ....."
     - name: Enviar a imagem para o docker registry
       run: echo "executar o docker push"
   CD:
