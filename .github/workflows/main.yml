@@ -16,10 +16,14 @@ jobs:
       with:
         username: ${{ secrets.DOCKERHUB_USER }}
         password: ${{ secrets.DOCKERHUB_PWD }}
-    - name: Construir a imagem de container
-      run: echo "docker build ....."
-    - name: Enviar a imagem para o docker registry
-      run: echo "executar o docker push"
+    - name: Construção e envio da imagem docker da aplicação web
+      uses: docker/build-push-action@v5.0.0
+      with:
+        context: ./kube-news/src
+        file: ./kube-news/src/Dockerfile
+        tags: |
+          fabricioveronez/kube-news:${{ github.run_number }}
+          fabricioveronez/kube-news:latest
   CD:
     runs-on: ubuntu-latest
     needs: [CI]
