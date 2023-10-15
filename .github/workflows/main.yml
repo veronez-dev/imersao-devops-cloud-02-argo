@@ -24,7 +24,7 @@ jobs:
         context: ./kube-news/src
         file: ./kube-news/src/Dockerfile
         push: true
-        tag: |
+        tags: |
           fabricioveronez/kube-dev:${{ github.run_number }}
           fabricioveronez/kube-dev:latest
   CD:
