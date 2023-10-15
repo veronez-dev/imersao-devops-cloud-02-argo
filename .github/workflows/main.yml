@@ -9,6 +9,8 @@ jobs:
   CI:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout dos arquivos do projeto
+      uses: actions/checkout@v4.1.0
     - name: Efetuar o login no docker hub
       run: echo "executar o docker login"
     - name: Docker Login
